@@ -1,0 +1,24 @@
+[project]
+name = "edit-ia-pro"
+version = "0.1.0"
+description = "Edição automática de vídeos curtos verticais seguindo o roteiro EDIT IA PRO"
+requires-python = ">=3.10"
+dependencies = ["pillow>=10", "numpy", "opencv-python-headless"]
+
+[project.optional-dependencies]
+transcricao = ["faster-whisper"]
+teste = ["pytest"]
+
+[project.scripts]
+edit-ia-pro = "edit_ia_pro.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["edit_ia_pro"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["lento: renderiza vídeo com ffmpeg"]
