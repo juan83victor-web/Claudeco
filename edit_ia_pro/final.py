@@ -109,6 +109,7 @@ def desenhar_chamada(texto: str, cor: str, y_centro: int) -> Image.Image:
 
 
 def _camada_chamada(texto: str, cor: str, pasta: Path, duracao: float, rostos: list[Rosto]) -> Path:
+    pasta.mkdir(parents=True, exist_ok=True)
     inicio = max(duracao - DURACAO_CHAMADA, 0)
     y = posicao_vertical(260, rostos_entre(rostos, inicio, duracao), preferido=760)
     parado = desenhar_chamada(texto, cor, y)

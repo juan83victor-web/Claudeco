@@ -99,3 +99,11 @@ def test_cli_do_comeco_ao_fim(tmp_path, video_sintetico, roteiro, capsys):
     linhas = (pasta / "estado.md").read_text()
     assert "final entregue" in linhas and "#8EC9FF" in linhas
     assert video_sintetico.exists()  # o original nunca é alterado
+
+
+def test_chamada_final_sem_legenda_nem_animacao(cortado, tmp_path):
+    _, saida, _ = cortado
+    estilo = final.Estilo(texto_gancho="Olha o resultado", chamada="Toque em Saiba Mais", zoom=False, ritmo="nenhuma")
+    res = final.compor(saida, [], [], estilo, tmp_path / "w", tmp_path / "final.mp4", momentos=[])
+    assert conferir.duracao_bate(res.arquivo, saida)[0]
+    assert [s.nome for s in res.sons] == ["whoosh", "ding"]
